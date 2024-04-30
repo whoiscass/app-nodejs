@@ -8,7 +8,7 @@ import { TransactionResponse } from './schema/transaction.response';
 @Injectable()
 export class AppService {
   constructor(
-    @Inject('BILLING_SERVICE') private readonly billingClient: ClientKafka,
+    @Inject('FRAUD_SERVICE') private readonly fraudClient: ClientKafka,
     @InjectModel(Transaction.name) private readonly transactionModel: Model<TransactionDocument>,
   ) {}
 
@@ -23,7 +23,7 @@ export class AppService {
 
   async createTransaction(transacion: Transaction) {
     const created = await this.transactionModel.create(transacion);
-    this.billingClient.emit(
+    this.fraudClient.emit(
       'transaction_created',
       JSON.stringify({ transaction: created }),
     );

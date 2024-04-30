@@ -10,15 +10,15 @@ import { Transaction, TransactionSchema } from './schema/transaction.schema';
   imports: [
     ClientsModule.register([
       {
-        name: 'BILLING_SERVICE',
+        name: 'FRAUD_SERVICE',
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'billing',
+            clientId: 'fraud',
             brokers: ['localhost:9092'],
           },
           consumer: {
-            groupId: 'billing-consumer',
+            groupId: 'fraud-consumer',
           },
         },
       },
