@@ -1,12 +1,16 @@
 version: "3.7"
 services:
-  postgres:
-    image: postgres:14
-    ports:
-      - "5432:5432"
+  mongodb:
+    container_name: app-database
+    image: mongo
+    command: mongod --auth
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - MONGO_INITDB_DATABASE=demo
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    restart: always 
+    ports:
+      - '27017:27017'
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.3
     environment:
